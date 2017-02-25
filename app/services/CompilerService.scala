@@ -42,6 +42,11 @@ class CompilerService {
 
     fileManager.close()
 
-    strBld.mkString
+    val errors = strBld.mkString
+
+    if (errors.isEmpty)
+      "Successfully compiled"
+    else
+      errors
   }
 }

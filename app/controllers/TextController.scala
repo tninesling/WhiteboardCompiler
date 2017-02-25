@@ -15,7 +15,7 @@ class TextController @Inject()(compiler: CompilerService) extends Controller {
   }
 
   def textToJavaFile(programText: String): Option[File] = {
-    val maybeFile = Try(new File("tmp/files/tempFile.java"))
+    val maybeFile = Try(new File("tmp/files/Test.java"))
 
     maybeFile match {
       case Success(file) => {
