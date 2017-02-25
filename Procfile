@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/whiteboardcompiler -Dhttp.port=${PORT}
+web: whiteboardcompiler -Dhttp.port=${PORT}
