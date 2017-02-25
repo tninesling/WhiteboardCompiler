@@ -1,6 +1,7 @@
 logs
 target
-!/target/universal/stage/bin
+!target/universal/stage/bin/whiteboardcompiler
+!target/universal/stage/bin/whiteboardcompiler.bat
 /.idea
 /.idea_modules
 /.classpath
