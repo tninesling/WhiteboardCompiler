@@ -22,10 +22,10 @@ class RunnerService {
   }
 
   def captureRunOutput(proc: Process): String = {
-    val bre = Try(Source.fromInputStream(proc.getErrorStream))
     val bri = Try(Source.fromInputStream(proc.getInputStream))
+    val bre = Try(Source.fromInputStream(proc.getErrorStream))
 
-    (bre, bri) match {
+    (bri, bre) match {
       case (Success(s1: BufferedSource), Success(s2: BufferedSource)) =>
         proc.waitFor
         getReaderOutput(s1, s2)
