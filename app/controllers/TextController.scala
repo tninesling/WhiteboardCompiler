@@ -1,6 +1,6 @@
 package controllers
 
-import services.CompilerService
+import services.{CompilerService, RunnerService}
 import java.io._
 import javax.inject._
 import play.api._
@@ -8,10 +8,15 @@ import play.api.mvc._
 import scala.util.{Try, Success, Failure}
 
 @Singleton
-class TextController @Inject()(compiler: CompilerService) extends Controller {
+class TextController @Inject()(compiler: CompilerService, runner: RunnerService) extends Controller {
   def compileText(programText: String) = Action {
     val maybeFile = textToJavaFile(programText)
-    Ok(compileFile(maybeFile))
+    val compileResult = compileFile(maybeFile)
+
+    if (compileResult.isEmpty)
+      Ok(runner.runProgram("Test"))
+    else
+      Ok(compileResult)
   }
 
   def textToJavaFile(programText: String): Option[File] = {

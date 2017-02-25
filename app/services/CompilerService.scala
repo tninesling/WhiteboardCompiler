@@ -22,6 +22,9 @@ class CompilerService {
     }
   }
 
+  /** Returns a string with the error message from the compiler. If the file
+    * is compiled successfully, an empty string will be returned
+    */
   def compile(files: Iterable[File]): String = {
     val compiler = ToolProvider.getSystemJavaCompiler()
     val fileManager = compiler.getStandardFileManager(null, null, null)
@@ -38,15 +41,12 @@ class CompilerService {
             .append(d.getLineNumber)
             .append(" in ")
             .append(d.getSource.toUri)
+            .append("\n")
+            .append(d.getMessage(null))
     }
 
     fileManager.close()
 
-    val errors = strBld.mkString
-
-    if (errors.isEmpty)
-      "Successfully compiled"
-    else
-      errors
+    strBld.mkString
   }
 }
